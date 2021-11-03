@@ -88,6 +88,16 @@ function calculation() {
       total = valueTwo;
     }
   }
+
+  if (this.operator === '%' && inputScreen.value !== "") {
+    total = valueTwo / 100;
+  }
+
+  if (this.operator === "+/-" && inputScreen.value !== "") {
+    if (valueTwo > 0) {
+        total = -valueTwo;
+    }
+}
   
   total = transformPointToComma(total);
   this.inputValueMemo = total;
