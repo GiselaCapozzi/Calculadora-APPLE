@@ -25,6 +25,8 @@ const filterAction = value => {
   value === '/' ? setOperation('/') : null;
   value === '%' ? setOperation('%') : null;
   value === '+/-' ? setOperation('+/-') : null;
+
+  value === '=' ? calculation() : null;
 }
 
 function addNumberInput(value) {
@@ -57,7 +59,7 @@ function calculation() {
     total = valueOne + valueTwo
   }
 
-  total = transformCommaToPoint(total);
+  total = transformPointToComma(total);
   this.inputValueMemo = total;
   inputScreen.value = "";
   inputScreen.placeholder = total;
@@ -66,12 +68,12 @@ function calculation() {
 function transformCommaToPoint(value) {
   if (typeof value !== "number") {
     let resultTransform = value.replace(',', '.');
-    return parseFloat(resultTransform)
+    return parseFloat(resultTransform);
   }
   return value;
 }
 
-function transformCommaToPoint(value) {
+function transformPointToComma(value) {
   let resultTransform = value.toString();
   resultTransform = resultTransform.replace('.', ',');
   return resultTransform;
