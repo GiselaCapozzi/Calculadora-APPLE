@@ -65,6 +65,14 @@ function calculation() {
     total = valueOne + valueTwo
   }
 
+  if (this.operator === '-' && inputScreen.value !== "") {
+    if (valueOne !== 0) {
+      total = valueOne - valueTwo;
+    } else {
+      total = valueTwo;
+    }
+  }
+  
   total = transformPointToComma(total);
   this.inputValueMemo = total;
   inputScreen.value = "";
