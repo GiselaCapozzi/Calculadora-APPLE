@@ -1,9 +1,12 @@
+var operator = null;
+var inputValueMemo = 0;
+
 function getContentClick(event) {
   const value = event.target.innerHTML;
   filterAction(value)
 };
 
-const filterAction = (value) => {
+const filterAction = value => {
   value === '0' ? addNumberInput(0) : null;
   value === '1' ? addNumberInput(1) : null;
   value === '2' ? addNumberInput(2) : null;
@@ -15,6 +18,13 @@ const filterAction = (value) => {
   value === '8' ? addNumberInput(8) : null;
   value === '9' ? addNumberInput(9) : null;
   value === ',' ? addNumberInput(',') : null;
+
+  value === '+' ? setOperation('+') : null;
+  value === '-' ? setOperation('-') : null;
+  value === '*' ? setOperation('*') : null;
+  value === '/' ? setOperation('/') : null;
+  value === '%' ? setOperation('%') : null;
+  value === '+/-' ? setOperation('+/-') : null;
 }
 
 function addNumberInput(value) {
@@ -26,4 +36,43 @@ function addNumberInput(value) {
     return;
   }
   inputScreen.value = inputValue + value;
+}
+
+function setOperation(operator) {
+  const inputScreenValue = document.getElementsByClassName('calculator__screen')[0].value;
+  this.operator = operator;
+
+  if (inputScreenValue != 0) {
+    calculation();
+  }
+}
+
+function calculation() {
+  const inputScreen = document.getElementsByClassName('calculator__screen')[0];
+  let valueOne = transformCommaToPoint(this.inputValueMemo);
+  let valueTwo = transformCommaToPoint(inputScreen.value);
+  let total = 0;
+
+  if (this.operator === '+' && inputScreen.value !== "") {
+    total = valueOne + valueTwo
+  }
+
+  total = transformCommaToPoint(total);
+  this.inputValueMemo = total;
+  inputScreen.value = "";
+  inputScreen.placeholder = total;
+}
+
+function transformCommaToPoint(value) {
+  if (typeof value !== "number") {
+    let resultTransform = value.replace(',', '.');
+    return parseFloat(resultTransform)
+  }
+  return value;
+}
+
+function transformCommaToPoint(value) {
+  let resultTransform = value.toString();
+  resultTransform = resultTransform.replace('.', ',');
+  return resultTransform;
 }
