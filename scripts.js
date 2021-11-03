@@ -72,6 +72,22 @@ function calculation() {
       total = valueTwo;
     }
   }
+
+  if (this.operator === '*' && inputScreen.value !== "") {
+    if (valueOne !== 0) {
+      total = valueOne * valueTwo;
+    } else {
+      total = valueTwo;
+    }
+  }
+
+  if (this.operator === '/' && inputScreen.value !== '') {
+    if(valueOne !== 0) {
+      total = valueOne / valueTwo
+    } else {
+      total = valueTwo;
+    }
+  }
   
   total = transformPointToComma(total);
   this.inputValueMemo = total;
